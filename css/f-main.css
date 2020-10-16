@@ -1,0 +1,151 @@
+.f-main{
+    padding-top: 10px;
+    background-color: #fff;
+}
+.navTop{ 
+    width: 1150px; 
+    margin: 0 auto; 
+    height: 129px; 
+}
+.f_ablock01 i{
+    background: url('../images/Official_n.png') no-repeat center center; 
+    height: 45px; 
+    width: 45px; 
+    display: block; 
+    margin-left: 63.5px; 
+}
+.f_table{
+    width: 100%;
+}
+.f_table tr td a{
+     padding-top: 20px; 
+     text-align: center; 
+     margin: 0px auto; 
+     width: 168px; 
+     display: block; 
+     color: white; 
+}
+.f_table tr td a span{ 
+    font-size: 16px; 
+    color: #333; 
+}
+.f_table tr td a p{ 
+    color: #bbb; 
+    text-align: center; 
+    margin-top: 7px; 
+    white-space: nowrap; 
+}
+
+.navCenter{
+    height: 154px;
+    clear: both;
+}
+.navCenter table{ 
+    height: 110px; 
+    width: 630px; 
+    margin-top: 4px; 
+    float: left; 
+    text-align: left; 
+    margin-left: 55px; 
+}
+.navCenter table tr th{ 
+    line-height: 35px; 
+    font-size: 14px; 
+    font-weight: normal; 
+}
+.navCenter table tr{ 
+    line-height: 29px; 
+}
+.navCenter table tr td a{ 
+    color: #bbb; 
+}
+.navCenter table tr td a:hover{ 
+    cursor: pointer; 
+    color: #4A4041; 
+}
+.navCenter > div{
+    width: 450px; 
+    padding-top: 10px; 
+}
+.f_url02{ 
+    margin-top: 6px; 
+    font-size: 12px; 
+    float: left; 
+    text-align: center; 
+    margin-left: 10px; 
+}
+.f_img{ 
+    height: 90px; 
+    padding: 0; 
+    border: 1px solid #F4F4F4; 
+}
+
+.f_kfu{ 
+    float: right; 
+    margin-right: 55px; 
+    margin-top: 20px; 
+}
+.f_span1{ 
+    font-size: 12px; 
+    line-height: 100%; 
+    margin-bottom: 10px;
+}
+.f_span2{ 
+    font-size: 16px; 
+    line-height: 100%; 
+    margin-bottom: 15px; 
+}
+.f_span3{ 
+    font-size: 12px; 
+    color: #fff; 
+    text-align: center; 
+    background: #9D1D22 ; 
+    cursor: pointer; 
+    padding: 5px 13px; 
+    border-radius: 4px; 
+}
+
+.navLast{
+    padding-top: 5px;
+    text-align: center;
+}
+.navLast a.on{ 
+    cursor: pointer; 
+    color: #c0a59a; 
+}
+.navLast a{ 
+    color: #bbb; 
+    margin: 0 15px; 
+}
+
+.oldivLink{
+    text-align: center;
+    background-color: #fff;
+}
+.CentreBox{ 
+    margin: 10px auto 20px; 
+}
+.CentreBox a{ 
+    margin: 0 10px; 
+    color: #bbb; 
+}
+.f_p{ 
+    margin: 0 auto; 
+    clear: both; 
+    text-align: center; 
+    padding-top: 0px; 
+    color: #bbb; 
+}
+.oldivLink .info{
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 80px;
+}
+.oldivLink .info img{
+    height: 28px;
+    margin: 0 5px;
+}
+.oldivLink .info a:nth-child(3) img{
+    height: 40px;
+    margin-top: -7px;
+}

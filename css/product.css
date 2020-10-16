@@ -1,0 +1,181 @@
+.container{
+    padding: 0 15px;
+    margin: 0 auto 10px;
+    width: 1200px;
+}
+.product-img{
+    padding: 30px 15px;
+    margin: 30px auto;
+    width: 1200px;
+    background-color: #fff;
+    text-align: center;
+}
+.breadcrumb{
+    padding: 0;
+    margin: 0 -15px;
+    background: 0 0 ;
+    font-size: 14px !important;
+    list-style: none;
+    border-radius: 4px;
+    padding-left: 15px;
+}
+.breadcrumb>li{
+    display: inline-block;
+}
+.breadcrumb .active{
+    color: #c99f6a;
+}
+.breadcrumb>li+li:before{
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+#detail {
+    background: #fff;
+    padding: 20px 0;
+    overflow:hidden;
+}
+.item-info .item-pic {
+    width: 600px;
+    height: 490px;
+    border-right: 1px solid #eaeaea;
+    position: relative;
+    text-align: center;
+}
+.item-info .item-intr {
+    position: relative;
+    width: 520px;
+    margin-right: 50px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    color: #999;
+}
+.item-intr .item-title {
+    margin-left: -10px;
+    font: 14px/30px 'microsoft yahei';
+    overflow: hidden;
+}
+.item-intr .item-profit {
+    margin-left: -10px;
+    height: 50px;
+    font: 14px/20px 'microsoft yahei';
+    color: #9D1D22 ;
+    margin-bottom: 10px;
+}
+.item-intr .item-actPrice {
+    margin-left: -10px;
+    margin-bottom: 0px;
+    background-color: #F9F9F8;
+    padding: 10px 0 10px 10px;
+}
+
+.item-intr .item-actPrice i {
+    font-style: normal;
+    color: #9D1D22;
+    font-family: "microsoft yahei";
+}
+
+.item-intr .item-actPrice b {
+    font-size: 24px;
+    font-weight: bold;
+    color: #9D1D22 ;
+    font-family: "microsoft yahei";
+}
+.ntalk-bg-1 {
+    display: inline-block;
+    width: 67px;
+    line-height: 22px;
+    color: #9D1D22 ;
+    background: #FDE2A7;
+    border-radius: 11px;
+    text-align: center;
+    position: relative;
+    top: -5px;
+    left: 5px;
+}
+.item-intr .item-saled {
+    margin: 10px 0;
+}
+.item-intr .item-saled span {
+    color: #333;
+    padding-right: 20px;
+    font-size: 14px;
+    vertical-align: bottom;
+}
+
+.item-intr .item-assess {
+    margin-top: -30px;
+    margin-left: 140px;
+    vertical-align: top;
+    color: #333;
+}
+
+.item-intr .item-assess .assess-lv {
+    display: inline-block;
+    *display: inline;
+}
+
+.item-intr .item-assess .spring-assess {
+    float: left;
+}
+.lv5 .spring-assess-highlight{
+    display: inline-block;
+    width: 100px;
+}
+.spring-assess-highlight { height: 20px; background: url(../images/star.png) repeat-x left center; }
+.item-intr .item-property .input-group {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.item-intr .gg {
+    padding-left: 65px;
+}
+.item-intr .gg .property-name {
+    margin-left: -65px;
+    color: #999;
+}
+.item-intr .item-property .property-name {
+    display: inline-block;
+    margin-right: 20px;
+    line-height: 30px;
+    color: #999;
+    float: left;
+}
+.item-intr .item-property .input-group{
+    position: relative;
+    margin-bottom: 10px;
+}
+.item-intr .item-property .input-group .property-value {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 1px solid #cccccc;
+    margin-right: 10px;
+    font: 12px/20px "Hiragino Sans GB";
+    border-radius: 2px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.item-intr .item-property .input-group .on .property-value {
+    border: 1px solid #9D1D22 ;
+    color: #9D1D22 ;
+}
+.divider{
+    height: 1px;
+    margin: 10px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.buy{
+    text-align: center;
+    margin-top: 20px;
+}
+.buy input{
+    padding: 9px 34px;
+    background: none;
+    margin-right: 10px;
+    font: 14px/20px "microsoft yahei";
+    border: 1px solid #9D1D22 ;
+    background-color: #9D1D22 ;
+    color: #fff;
+    border-radius: 2px;
+}

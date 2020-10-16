@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方太(FOTILE)集团唯一官方网上商城——方太商城</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/boxface.css">
+    <link rel="stylesheet" href="../css/banner.css">
+    <link rel="stylesheet" href="../css/product-box.css">
+    <link rel="stylesheet" href="../css/hotsale.css">
+    <link rel="stylesheet" href="../css/news.css">
+    <link rel="stylesheet" href="../css/f-main.css">
+    <link rel="stylesheet" href="../lib/swiper.min.css">
+    <style>
+        .swiper-container{
+            width: 988px;
+            height: 450px;            
+        }
+        .swiper-container img{
+            width: 988px;
+            height: 450px;
+        }
+        
+    </style>
+    <script src="../lib/swiper.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+</head>
+<body>    
+    <!-- 固定的头部 -->
+    <div class="header">
+        <div class="header-box box-cen clearfix">
+            <div class="trust">
+                <a href="https://www.fotile.com/" target="_blank">
+                    <span>方太官网</span>
+                </a>
+                <a href="https://www.fotile.com/xingfu/Index/index.html?utm_source=fotile-dh" target="_blank">
+                    <span>方太幸福家</span>
+                </a>
+            </div>
+            <div class="gonggao">
+                <p>
+                    <a href="javaScript:;">公告：官方商城特惠专场，更多优惠咨询客服！</a>
+                </p>
+            </div>
+            <script>
+                $('.gonggao>p').animate({
+                    left:-252,
+                },3000,'linear',function(){
+                    $('.gonggao>p').css({
+                        left:380
+                    })
+                })
+                function ab(){
+                    $('.gonggao>p').animate({
+                        left:-252,
+                    },6000,'linear',function(){
+                        $('.gonggao>p').css({
+                            left:380
+                        })
+                        setTimeout(ab,0); 
+                    })
+                }
+                ab();
+                
+            </script>
+            <div class="login-info">
+                <div class="login-link">
+                    <a href="./login.html">登录</a>
+                    <span class="v-line">|</span>
+                    <a href='./register.html'>注册</a>
+                </div>
+            </div>
+            <script>
+                if(localStorage.getItem('un')){
+                    $('.login-info').empty();
+                    $('.login-info').append(`
+                        <p style="float:left;width:90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">欢迎你，${localStorage.getItem('un')}</p>
+                        <button style="float:right;height:30px;border:none;background-color: transparent;">退出</button>
+                    `)
+                }
+                $('.login-info>button').click(function(){
+                    localStorage.clear();
+                    window.location.reload()
+                })
+            </script>
+            <div class="publicHd">
+                <span class="proHd">广东省</span>
+                <span class="ctHd">深圳市</span>
+                <span class="addrHd">切换</span>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="nav box-cen">
+            <h1 class="logo">
+                <a href="./index.html"></a>
+            </h1>
+            <ul class="nav-menu clearfix">
+                <li><a href="#" class="on">首页</a></li>
+                <li class="down-group">
+                    <a href="javascript:;" class="down">全部商品</a>
+                    <ul class="submenu">
+                    </ul>
+                    <script>
+                        var txt;
+                        var sWidth = $(window).width()-14;
+                        $('.down-group').mouseenter(function(){
+                            $('.submenu')[0].style.display = 'flex';
+                        });
+                        $('.down-group').mouseleave(function(){
+                            $('.submenu')[0].style.display = 'none';
+                        });
+                        $('.submenu').css({
+                            width:sWidth,
+                        });
+                        $.ajax({
+                            url:'../submenu.json',
+                            success:function(res){
+                                $.each(res,function(i,v){
+                                    $('.submenu').append('<li><a href="#">'+v.name+'</a></li>')
+                                })
+                            },
+                        })
+                    </script>
+                </li>
+                <li><a href="./product.html">热卖套餐</a></li>
+                <li><a href="./product.html">积分商城</a></li>
+                <li class="oColor"><a href="./product.html">限时特惠</a></li>
+                <li class="oColor"><a href="./product.html">活动咨询</a></li>
+            </ul>
+            <div class="search-box">
+                <p class="search-border">
+                    <input type="text" name="search" placeholder="JQD2" class="search-txt">
+                    <span class="search-icon"></span>
+                    <ul class="search-ul">
+
+                    </ul>
+                    <!-- 搜索-套用百度 -->
+                    <script>
+                        $('.search-txt').on('input',function(){
+                            var text = $(this).val()
+                            // 发送jsonp请求
+                            $.ajax({
+                                url:"https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=32757,32617,1448,32790,7566,7545,31660,32705,32230,7517,7605,32117,32718&req=2&csor=1",
+                                data:{
+                                    wd:text
+                                },
+                                dataType:'jsonp',
+                                jsonp:'cb'                
+                            })
+                            .then(function(res){
+                                // 每次有结果都要先清空ul里面原来的li再进行添加
+                                $('.search-ul').empty();
+                                // 根据返回的结果
+                                console.log(res.g)
+                                // 显示在ul里面
+                                $.each(res.g,function(i,v){
+                                    $('.search-ul').append('<li>'+v.q+'</li>')
+                                })
+                            })
+                        })
+                    </script>
+                    
+                </p>
+            </div>
+            <div class="shopcar-link">
+                <a href="./cart.html">
+                    购物车
+                    <span id="shopcarcount">(0)</span>
+                </a>
+            </div>            
+        </div>
+    </div>
+    <!-- 填补头部文档流 -->
+    <div class="placeholder"></div>
+    <!-- 轮播和菜单 -->
+    <div class="box-face box-cen">
+        <div class="box-groupType">
+            <ul>
+                <li><a href="./product.html">热卖套餐</a></li>
+                <li><a href="./product.html">油烟机</a></li>
+                <li><a href="./product.html">燃气灶</a></li>
+                <li><a href="./product.html">消毒柜</a></li>
+                <li><a href="./product.html">热水器</a></li>
+                <li><a href="./product.html">蒸箱</a></li>
+                <li><a href="./product.html">烤箱</a></li>
+                <li><a href="./product.html">微波炉</a></li>
+                <li><a href="./product.html">水槽洗碗机</a></li>
+                <li><a href="./product.html">烹饪机</a></li>
+                <li><a href="./product.html">净水机</a></li>
+                <li><a href="./product.html">新风空净</a></li>
+            </ul>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="../images/swiper-01.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-02.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-03.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-04.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-05.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-06.jpg" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../images/swiper-07.jpg" alt="">
+                </div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+            
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            
+            <!-- 如果需要滚动条 -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    <script>
+        var mySwiper = new Swiper ('.swiper-container', {
+        loop: true, // 循环模式选项
+        autoplay:{
+            delay:3000,
+            disableOnInteraction:false
+        },
+        
+        // 如果需要分页器
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        
+      }) 
+    </script>
+    <!-- 广告 -->
+    <div class="banner-box article">
+        <div class="box-hd">
+
+        </div>
+        <ul class="box-cen clearfix">
+            <li class="item-banner">
+                <a href="./product.html">
+                    <img src="../images/new-int.jpg" alt="">
+                    <span class="title">新品推荐</span>
+                    <span class="dec">EMC2立方环吸云魔方烟灶套餐</span>
+                </a>
+            </li>
+            <li class="item-banner">
+                <a href="./product.html">
+                    <img src="../images/youyanji.jpg" alt="">
+                    <span class="title">中式油烟机</span>
+                    <span class="dec">厨房焕新颜</span>
+                </a>
+            </li>
+            <li class="item-banner">
+                <a href="./product.html">
+                    <img src="../images/sever.jpg" alt="">
+                    <span class="title">至诚服务</span>
+                    <span class="dec">因爱伟大</span>
+                </a>
+            </li>
+            <li class="item-banner">
+                <a href="./product.html">
+                    <img src="../images/jiefang.jpg" alt="">
+                    <span class="title">解放双手</span>
+                    <span class="dec">想洗就洗</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 产品部分 -->
+        <!-- 特惠 -->
+    <div class="tehui product-box clearfix article">
+        <div class="box-hd">
+            <h2>
+                <i>特惠产品</i>
+                <a href="#">查看更多 </a>
+            </h2>
+        </div>
+        <div class="box-cen">
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/tuhui01.jpg" alt="">
+                    </a>
+                    <div class="img-nav">
+                        <img src="../images/tuihui01-1.jpg" alt="">
+                        <img src="../images/tuihui01-2.jpg" alt="">
+                        <img src="../images/tuihui01-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 EMC2＋TH33B 云魔方 烟灶套餐</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">一键瞬吸，速排油烟，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-djs">
+                        <span>5</span>天
+                        <span>11</span>时
+                        <span>45</span>分
+                        <span>44</span>秒
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥3600</i>
+                        </b>
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/tuhui01.jpg" alt="">
+                    </a>
+                    <div class="img-nav">
+                        <img src="../images/tuihui01-1.jpg" alt="">
+                        <img src="../images/tuihui01-2.jpg" alt="">
+                        <img src="../images/tuihui01-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 EMC2＋TH33B 云魔方 烟灶套餐</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">一键瞬吸，速排油烟，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-djs">
+                        <span>5</span>天
+                        <span>11</span>时
+                        <span>45</span>分
+                        <span>44</span>秒
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥3600</i>
+                        </b>
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/tuhui01.jpg" alt="">
+                    </a>
+                    <div class="img-nav">
+                        <img src="../images/tuihui01-1.jpg" alt="">
+                        <img src="../images/tuihui01-2.jpg" alt="">
+                        <img src="../images/tuihui01-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 EMC2＋TH33B 云魔方 烟灶套餐</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">一键瞬吸，速排油烟，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-djs">
+                        <span>5</span>天
+                        <span>11</span>时
+                        <span>45</span>分
+                        <span>44</span>秒
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥3600</i>
+                        </b>
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/tuhui01.jpg" alt="">
+                    </a>
+                    <div class="img-nav">
+                        <img src="../images/tuihui01-1.jpg" alt="">
+                        <img src="../images/tuihui01-2.jpg" alt="">
+                        <img src="../images/tuihui01-3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 EMC2＋TH33B 云魔方 烟灶套餐</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">一键瞬吸，速排油烟，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-djs">
+                        <span>5</span>天
+                        <span>11</span>时
+                        <span>45</span>分
+                        <span>44</span>秒
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥3600</i>
+                        </b>
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function getTime(){
+                    //获取时间差               
+                    var target = new Date("2020-12-31 00:00:00");
+                    var from = new Date();
+                    // 1 先获取两个时间点到格林威治时间的毫秒数
+                    target = target.getTime();
+                    from = from.getTime();                
+                    // 2 两个毫秒数相减,得到两个时间点之间的毫秒数
+                    var differenceTime = target - from;
+                    differenceTime = parseInt(differenceTime/1000);//把毫秒换算成秒                
+                    // 3 把我们计算的秒数换算成时间
+                    //3.1 先计算出有多少天
+                    //一天是24*60*60秒
+                    //用总的秒数除以一天的秒数,就能得到多少天
+                    var day = differenceTime/(24*60*60);
+                    day = Math.floor(day)
+                    //3.2 计算有多少小时
+                    //不够一天的就变成小时
+                    var afterHours = differenceTime - day*24*60*60;//单位是秒
+                    //一小时:60*60秒
+                    var hours = parseInt(afterHours/3600);//单位是小时
+                    //3.3 计算有多少分钟
+                    //不够一小时的就变成分钟
+                    var afterMinutes = afterHours - hours*3600;
+                    //一分钟:60秒
+                    var minutes = Math.floor(afterMinutes/60);
+                    //3.4 计算有多少秒
+                    var seconds = afterMinutes - minutes*60;
+                    // console.log('相差'+day+'天'+hours+'小时'+minutes+'分'+seconds+'秒')
+                    //渲染
+                    for(var i =0;i<16;i++){
+                        var key = i%4;
+                        switch(key){
+                            case key=0:$('.item-djs>span').eq(i).html(day);break;
+                            case key=1:$('.item-djs>span').eq(i).html(hours);break;
+                            case key=2:$('.item-djs>span').eq(i).html(minutes);break;
+                            case key=3:$('.item-djs>span').eq(i).html(seconds);break;
+                        }
+                    }
+                }
+                setInterval(function(){
+                    getTime();
+                },1000)
+            </script>
+        </div>
+    </div>
+        <!-- 热卖推荐 -->
+    <div class="hotsale article">
+        <div class="box-hd">
+            <h2>
+                <i>热卖推荐</i>
+                <a href="#">查看更多 </a>
+            </h2>
+        </div>
+        <div class="box-cen">
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/hot.jpg" alt="">
+                    </a>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 JQC2＋HT9BE 风魔方 烟灶套餐（不带装饰罩）</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">瞬吸油烟　速享清新，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥4600</i>
+                        </b>
+                    </div>
+                    <div class="act-btn">
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                        <span class="btn-fav">
+                            <i class="fav-icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/hot.jpg" alt="">
+                    </a>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 JQC2＋HT9BE 风魔方 烟灶套餐（不带装饰罩）</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">瞬吸油烟　速享清新，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥4600</i>
+                        </b>
+                    </div>
+                    <div class="act-btn">
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                        <span class="btn-fav">
+                            <i class="fav-icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/hot.jpg" alt="">
+                    </a>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 JQC2＋HT9BE 风魔方 烟灶套餐（不带装饰罩）</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">瞬吸油烟　速享清新，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥4600</i>
+                        </b>
+                    </div>
+                    <div class="act-btn">
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                        <span class="btn-fav">
+                            <i class="fav-icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-box">
+                <div class="img-box">
+                    <a href="./product.html">
+                        <img src="../images/hot.jpg" alt="">
+                    </a>
+                </div>
+                <div class="txt-box">
+                    <h2 class="item-name">
+                        <a href="./product.html">方太 JQC2＋HT9BE 风魔方 烟灶套餐（不带装饰罩）</a>
+                    </h2>
+                    <div class="item-doc">
+                        <a href="./product.html">瞬吸油烟　速享清新，更多优惠咨询在线客服！</a>
+                    </div>
+                    <div class="item-actPrice">
+                        <b>
+                            <i class="yen">￥4600</i>
+                        </b>
+                    </div>
+                    <div class="act-btn">
+                        <a href="./product.html" class="btn-link">立即购买</a>
+                        <span class="btn-fav">
+                            <i class="fav-icon"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- 商城咨询 -->
+    <div class="news article">
+        <div class="box-hd">
+            <h2>
+                <i>商城资讯</i>
+                <a href="#">查看更多 </a>
+            </h2>
+        </div>
+        <div class="box-cen">
+            <div class="item-box art1">
+                <div class="question">
+                    <h3>专家问询</h3>
+                    <ul class="notice-a01">
+                        <li>
+                            <div class="q">
+                                <a href="#">Q：油烟机的寿命大概有多久？</a>
+                            </div>
+                            <div class="a">
+                                8年，但是也有用户使用10几年的。延长使用寿命，主要是平时正确的保养和使用。
+                            </div>
+                        </li>
+                        <li>
+                            <div class="q">
+                                <a href="#">Q：油烟机插座应该安装在什么位置较为合适？</a>
+                            </div>
+                            <div class="a">
+                                专家建议：油烟机插座安装在需安装油烟机的上方，平顶下面20cm左右的地方，且要避免油烟机的出风口的即可。塔型机还应注意，插座的位置应该在电器控制盒的上方、装饰罩内部，不能与出风管或者电器盒干扰，又能保证美观。
+                            </div>
+                        </li>
+                        <li>
+                            <div class="q">
+                                <a href="#">Q：灶具上进风和下进风的区别与优势分别是什么？</a>
+                            </div>
+                            <div class="a">
+                                专家建议：上进风的优势在于进气充足，燃烧充分；下进风的优势在于可以把面板做成全密封的，清洁性能好。方太的灶具是上下立体进风设计，结合了上进风和下进风两种进风方式的各自优势。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item-box art2">
+                <div class="knowledge">
+                    <h3>方太小博士</h3>
+                    <ul class="notice-a02">
+                        <li>
+                            <a href="#">方太燃气热水器使用小贴士</a>
+                        </li>
+                        <li>
+                            <a href="#">了解了这些让你的 厨房有型又有料</a>
+                        </li>
+                        <li>
+                            <a href="#">“90后”YOUNG一代对精装有何要求？</a>
+                        </li>
+                        <li>
+                            <a href="#">嵌入式蒸箱使用指南</a>
+                        </li>
+                        <li>
+                            <a href="#">嵌入式消毒柜使用指南</a>
+                        </li>
+                        <li>
+                            <a href="#">一分钟带你辨别吸油烟机各种款式</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item-box art3">
+                <div class="notice">
+                    <h3>商城公告</h3>
+                    <ul class="notice-a03">
+                        <li>
+                            <a href="#">国庆期间发货通知公告</a>
+                        </li>
+                        <li>
+                            <a href="#"> 关于防疫期间上门服务及发货相关事项说明asd asdasd</a>
+                        </li>
+                        <li>
+                            <a href="#">2020年春节期间发货通知公告</a>
+                        </li>
+                        <li>
+                            <a href="#">官方商城会员制度</a>
+                        </li>
+                        <li>
+                            <a href="#">方太厨房管家小程序正式上线啦~</a>
+                        </li>
+                        <li>
+                            <a href="#">方太幸福服务热线952315上线的通知</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="f-main">
+        <div class="navTop f-cen">
+            <table class="f_table">
+                <tr>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="navCenter f-cen">
+            <table>
+                <tr>
+                    <th style="width: 20%;">购物指南</th>
+                    <th style="width: 20%;">付款方式</th>
+                    <th style="width: 20%;">物流配送</th>
+                    <th style="width: 20%;">常见问题</th>
+                    <th style="width: 20%;">关于我们</th>
+                </tr>
+                <tr>
+                    <td><a href="#">用户注册</a></td>
+                    <td><a href="#">付款时间</a></td>
+                    <td><a href="#">配送问题</a></td>
+                    <td><a href="#">服务政策</a></td>
+                    <td><a href="#">方太官方微博</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">订购流程</a></td>
+                    <td><a href="#">退款说明</a></td>
+                    <td><a href="#">配送范围</a></td>
+                    <td><a href="#">退货流程</a></td>
+                    <td><a href="#">网站地图</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">会员制度</a></td>
+                    <td><a href="#">付款方式</a></td>
+                    <td><a href="#">验货签收</a></td>
+                    <td><a href="#">退款说明</a></td>
+                    <td><a href="#">加入我们</a></td>
+                </tr>
+            </table>
+            <div style="height:157px;float:right;box-sizing: border-box;">
+                <div>
+                    <div class="f_url02">
+                        <img src="../images/wxin.png" alt="" class="f_img">
+                        <p>方太微信商城</p>
+                    </div>
+                </div>
+                <div class="f_kfu">
+                    <p class="f_span1">方太幸福服务热线</p>
+                    <p class="f_span2">952315</p>
+                    <span class="f_span3">咨询客服</span>
+                    <a href="#" class="f_span3">预约安装</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="navLast clearfix">
+            <a href="#" class="on ftnav">方太型号</a>
+            <span>|</span>
+            <a href="#" class="ftnav">友情链接</a>
+        </div>
+        <div class="oldivLink">
+            <div class="CentreBox">
+                <ul>
+                    <li class="#subopt">
+                        <a href="#">JQ08TA</a>
+                        <span>|</span>
+                        <a href="#">EM7T.S</a>
+                        <span>|</span>
+                        <a href="#">JA28BE</a>
+                        <span>|</span>
+                        <a href="#">SCD40-E2M</a>
+                        <span>|</span>
+                        <a href="#">KQD58F-E8</a>
+                        <span>|</span>
+                        <a href="#">JSQ31-B1601</a>
+                        <span>|</span>
+                        <a href="#">JBSD3T-Q7</a>
+                    </li>
+                </ul>
+            </div>
+            <p style="color: #bbb;">方太公司有权保留更改产品设计与规格，页面宣传--产品功能和参数详见收货产品说明书，届时恕不另行通知。</p>
+            <p class="f_p" style="margin-bottom: 20px;">
+            网站中涉及的数据、统计资料或调查结果（如有）等属于引证内容的，除特别标注外，其余均来自方太。<br/>
+            *不跑烟：在方太实验室规定条件下测试，肉眼未见明显的油烟逃逸。<br/>
+            *还能去果蔬农残：指能有效去除果蔬表面的氧化乐果、乐果等农药残留。<br/>
+            *同层同温：在方太实验室规定条件下测试，热风烘焙模式下180℃条件下，同层温差小于7℃。
+        
+            </p>
+            <p class="f_p">
+                Copyrignt 1996-2014.efotile.com 方太集团·宁波方太营销有限公司 | 版权所有 
+            </p>
+            <p style="padding-top:5px;">
+                <a href="#">浙ICP备13025845号-1</a>
+                <span>|</span>
+                <a href="#">浙公网安备 33029202000041号</a>
+            </p>   
+            <p class="info">
+                <a href="#">
+                    <img src="../images/foot01.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot02.jpg" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot03.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot04.jpg" alt="">
+                </a>
+            </p>
+        </div>
+    </div>
+        <!-- 固定浮动栏 -->
+    <div class="fixed-rightbot">
+        <div class="codeBox">
+            <a href="#">
+                <img src="../images/hongbao.jpg" alt="" class="redbag">
+            </a>
+            <div class="hb_box">
+                <img src="../images/coupon.png" alt="">
+            </div>            
+            <div style="overflow: hidden;">
+                <img src="../images/wechat.png" style="width: 70px;cursor: pointer;" alt="" class="n-erwei">
+                <div class="wechat_box">
+                    <img src="../images/sao.png" style="width: 140px;height: 160px;display: none;position: absolute;right: 80px;" alt="" class="l-erwei">
+                </div>
+            </div>
+            <div style="overflow: hidden; ">
+                <div>
+                    <img src="../images/service.png" style="width: 70px;" alt="">
+                </div>                
+            </div>
+            <div style="display: block;">
+                <img src="../images/backtoTop.png" style="width: 70px;cursor: pointer;" alt="" class="reTop">
+            </div>
+            <script>
+                // 红包隐藏显示
+                $('.redbag').mouseenter(function(){
+                    $('.hb_box')[0].style.display = 'block';
+                })
+                $('.redbag').mouseleave(function(){
+                    $('.hb_box')[0].style.display = 'none';
+                })
+                // 二维码隐藏显示
+                $('.n-erwei').mouseenter(function(){
+                    $('.l-erwei')[0].style.display = 'block';
+                })
+                $('.n-erwei').mouseleave(function(){
+                    $('.l-erwei')[0].style.display = 'none';
+                })
+                //回到顶部
+                $(function(){ 
+                    // 点击按钮的时候让页面滚动到顶部
+                    $('.reTop').click(function(){
+                        $('html').animate(
+                            {scrollTop:0},
+                        1000)
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</body>
+</html>

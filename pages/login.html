@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/f-main.css">
+    <style>
+        .header-iframe{
+            position: fixed;
+            top: 0;
+            z-index: 120;
+            height: 110px;
+            width: 100%;
+            border: 0;
+            box-shadow: 1px 1px 5px #ccc;
+        }
+        .footer-iframe{
+            bottom: 0;
+            width: 100%;
+            height: 666px;
+            border: 0;
+        }
+        .placeholder{
+            height: 120px;
+        }
+    </style>
+    <script src="../lib/jquery.min.js"></script>
+</head>
+<body>
+    <!-- 固定的头部 -->
+    <div class="header">
+        <div class="header-box box-cen clearfix">
+            <div class="trust">
+                <a href="https://www.fotile.com/" target="_blank">
+                    <span>方太官网</span>
+                </a>
+                <a href="https://www.fotile.com/xingfu/Index/index.html?utm_source=fotile-dh" target="_blank">
+                    <span>方太幸福家</span>
+                </a>
+            </div>
+            <div class="gonggao">
+                <p>
+                    <a href="javaScript:;">公告：官方商城特惠专场，更多优惠咨询客服！</a>
+                </p>
+            </div>
+            <div class="login-info">
+                <div class="login-link">
+                    <a href="./login.html">登录</a>
+                    <span class="v-line">|</span>
+                    <a href='./register.html'>注册</a>
+                </div>
+            </div>
+            <div class="publicHd">
+                <span class="proHd">广东省</span>
+                <span class="ctHd">深圳市</span>
+                <span class="addrHd">切换</span>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="nav box-cen">
+            <h1 class="logo">
+                <a href="./index.html"></a>
+            </h1>
+            <ul class="nav-menu clearfix">
+                <li><a href="#" class="on">首页</a></li>
+                <li class="down-group">
+                    <a href="javascript:;" class="down">全部商品</a>
+                    <ul class="submenu">
+                    </ul>
+                    <script>
+                        var txt;
+                        var sWidth = $(window).width()-14;
+                        $('.down-group').mouseenter(function(){
+                            $('.submenu')[0].style.display = 'flex';
+                        });
+                        $('.down-group').mouseleave(function(){
+                            $('.submenu')[0].style.display = 'none';
+                        });
+                        $('.submenu').css({
+                            width:sWidth,
+                        });
+                        $.ajax({
+                            url:'../submenu.json',
+                            success:function(res){
+                                $.each(res,function(i,v){
+                                    $('.submenu').append('<li><a href="#">'+v.name+'</a></li>')
+                                })
+                            },
+                        })
+                    </script>
+                </li>
+                <li><a href="#">热卖套餐</a></li>
+                <li><a href="#">积分商城</a></li>
+                <li class="oColor"><a href="#">限时特惠</a></li>
+                <li class="oColor"><a href="#">活动咨询</a></li>
+            </ul>
+            <div class="search-box">
+                <p class="search-border">
+                    <input type="text" name="search" placeholder="JQD2" class="search-txt">
+                    <span class="search-icon"></span>
+                    <ul class="search-ul">
+
+                    </ul>
+                    <!-- 搜索-套用百度 -->
+                    <script>
+                        $('.search-txt').on('input',function(){
+                            var text = $(this).val()
+                            // 发送jsonp请求
+                            $.ajax({
+                                url:"https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=32757,32617,1448,32790,7566,7545,31660,32705,32230,7517,7605,32117,32718&req=2&csor=1",
+                                data:{
+                                    wd:text
+                                },
+                                dataType:'jsonp',
+                                jsonp:'cb'                
+                            })
+                            .then(function(res){
+                                // 每次有结果都要先清空ul里面原来的li再进行添加
+                                $('.search-ul').empty();
+                                // 根据返回的结果
+                                console.log(res.g)
+                                // 显示在ul里面
+                                $.each(res.g,function(i,v){
+                                    $('.search-ul').append('<li>'+v.q+'</li>')
+                                })
+                            })
+                        })
+                    </script>
+                </p>
+            </div>
+            <div class="shopcar-link">
+                <a href="./cart.html">
+                    购物车
+                    <span id="shopcarcount">(0)</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="placeholder"></div>
+    <div class="denglu">
+        <div class="newBox">
+            <div class="formTitle">登录</div>
+            <div class="formBody">
+                <div class="formLine">
+                    <input type="text" name="userName" class="input100" id="userName" placeholder="输入用户名">
+                </div>
+                <div class="formLine">
+                    <input type="password" name="password" class="input100" id="password" placeholder="输入密码">
+                </div>
+                <div class="formLine">
+                    <input type="button" id="btn_login" class="button100 btn-orange" value="登  录">
+                </div>
+                <script>
+                    $('#btn_login').click(function(){
+                        $.ajax({
+                            method:'post',
+                            url:'../server/login.php',
+                            data:{
+                                username:$('#userName').val(),
+                                password:$('#password').val()
+                            },
+                            success:function(data){
+                                if(data.code==1){
+                                    //表示成功
+                                    //把用户名存入本地存储
+                                    localStorage.setItem('un',data.data.username)
+                                    //跳转到登陆页面
+                                    location.href="./index.html"
+                                }else{
+                                    //表示失败
+                                    alert(data.msg)
+                                }
+                            },
+                            dataType:'json'
+                        })
+                    })
+                </script>
+                <div class="formLine">
+                    <a href="./register.html" class="button100 button-link" style="font-weight: normal;">
+                        <span>还没有方太商城账号?   </span>
+                        <span style="color: #ff6900;">立即注册</span>
+                    </a>
+                </div>
+                <div class="formLine" style="text-align: center; margin-top: 18px;">
+                    <span style="font-size: 12px; color: #8f8e94; vertical-align: middle;">
+                        使用第三方账号登录：
+                        <a href="#" class="spring spring-wx"></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mg50"></div>
+    <div class="f-main">
+        <div class="navTop f-cen">
+            <table class="f_table">
+                <tr>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="#" class="f_ablock01">
+                            <i class="f_spanblock"></i>
+                            <span>官方直销</span>
+                            <p>方太集团官方商城</p>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="navCenter f-cen">
+            <table>
+                <tr>
+                    <th style="width: 20%;">购物指南</th>
+                    <th style="width: 20%;">付款方式</th>
+                    <th style="width: 20%;">物流配送</th>
+                    <th style="width: 20%;">常见问题</th>
+                    <th style="width: 20%;">关于我们</th>
+                </tr>
+                <tr>
+                    <td><a href="#">用户注册</a></td>
+                    <td><a href="#">付款时间</a></td>
+                    <td><a href="#">配送问题</a></td>
+                    <td><a href="#">服务政策</a></td>
+                    <td><a href="#">方太官方微博</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">订购流程</a></td>
+                    <td><a href="#">退款说明</a></td>
+                    <td><a href="#">配送范围</a></td>
+                    <td><a href="#">退货流程</a></td>
+                    <td><a href="#">网站地图</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">会员制度</a></td>
+                    <td><a href="#">付款方式</a></td>
+                    <td><a href="#">验货签收</a></td>
+                    <td><a href="#">退款说明</a></td>
+                    <td><a href="#">加入我们</a></td>
+                </tr>
+            </table>
+            <div style="height:157px;float:right;box-sizing: border-box;">
+                <div>
+                    <div class="f_url02">
+                        <img src="../images/wxin.png" alt="" class="f_img">
+                        <p>方太微信商城</p>
+                    </div>
+                </div>
+                <div class="f_kfu">
+                    <p class="f_span1">方太幸福服务热线</p>
+                    <p class="f_span2">952315</p>
+                    <span class="f_span3">咨询客服</span>
+                    <a href="#" class="f_span3">预约安装</a>
+                </div>
+            </div>
+            
+        </div>
+        <div class="navLast clearfix">
+            <a href="#" class="on ftnav">方太型号</a>
+            <span>|</span>
+            <a href="#" class="ftnav">友情链接</a>
+        </div>
+        <div class="oldivLink">
+            <div class="CentreBox">
+                <ul>
+                    <li class="#subopt">
+                        <a href="#">JQ08TA</a>
+                        <span>|</span>
+                        <a href="#">EM7T.S</a>
+                        <span>|</span>
+                        <a href="#">JA28BE</a>
+                        <span>|</span>
+                        <a href="#">SCD40-E2M</a>
+                        <span>|</span>
+                        <a href="#">KQD58F-E8</a>
+                        <span>|</span>
+                        <a href="#">JSQ31-B1601</a>
+                        <span>|</span>
+                        <a href="#">JBSD3T-Q7</a>
+                    </li>
+                </ul>
+            </div>
+            <p style="color: #bbb;">方太公司有权保留更改产品设计与规格，页面宣传--产品功能和参数详见收货产品说明书，届时恕不另行通知。</p>
+            <p class="f_p" style="margin-bottom: 20px;">
+            网站中涉及的数据、统计资料或调查结果（如有）等属于引证内容的，除特别标注外，其余均来自方太。<br/>
+            *不跑烟：在方太实验室规定条件下测试，肉眼未见明显的油烟逃逸。<br/>
+            *还能去果蔬农残：指能有效去除果蔬表面的氧化乐果、乐果等农药残留。<br/>
+            *同层同温：在方太实验室规定条件下测试，热风烘焙模式下180℃条件下，同层温差小于7℃。
+        
+            </p>
+            <p class="f_p">
+                Copyrignt 1996-2014.efotile.com 方太集团·宁波方太营销有限公司 | 版权所有 
+            </p>
+            <p style="padding-top:5px;">
+                <a href="#">浙ICP备13025845号-1</a>
+                <span>|</span>
+                <a href="#">浙公网安备 33029202000041号</a>
+            </p>   
+            <p class="info">
+                <a href="#">
+                    <img src="../images/foot01.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot02.jpg" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot03.png" alt="">
+                </a>
+                <a href="#">
+                    <img src="../images/foot04.jpg" alt="">
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

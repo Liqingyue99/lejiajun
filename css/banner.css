@@ -1,0 +1,40 @@
+.banner-box {
+  padding-bottom: 40px;
+}
+
+.box-hd {
+  padding-bottom: 20px;
+}
+
+.item-banner {
+  margin-left: 9px;
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 20px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.item-banner:first-child {
+  margin-left: 0;
+}
+.item-banner a {
+  width: initial;
+  display: inline-block;
+}
+.item-banner img {
+  width: 290px;
+  height: 160px;
+  display: block;
+}
+.item-banner .title {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #4A4041;
+}
+.item-banner .dec {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #C99F6A;
+}
+
+/*# sourceMappingURL=banner.css.map */

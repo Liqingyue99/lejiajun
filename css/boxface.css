@@ -1,0 +1,40 @@
+.box-face {
+  overflow: auto;
+}
+
+.box-groupType {
+  width: 200px;
+  margin-right: 12px;
+  float: left;
+  background-color: #fff;
+  position: relative;
+  z-index: 101;
+  border-radius: 4px;
+}
+.box-groupType li {
+  line-height: 37.6px;
+  font-size: 14px;
+}
+.box-groupType li a {
+  display: block;
+  width: 100%;
+  height: initial;
+  text-indent: 27px;
+  position: relative;
+  white-space: nowrap;
+  color: #4A4041;
+}
+.box-groupType li a:hover {
+  background-color: #F8F8F8;
+  color: #C99F6A;
+}
+
+.box-lunbo {
+  width: 988px;
+  height: 450px;
+  overflow: hidden;
+  float: left;
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=boxface.css.map */

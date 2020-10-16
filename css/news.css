@@ -1,0 +1,49 @@
+.news .box-cen{
+    background-color: #fff;
+    height: 290px;
+}
+.news .item-box{
+    display: inline-block;
+    width: 240px;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: top;
+}
+.news .item-box h3{
+    padding: 32px 0 24px;
+    font-size: 14px;
+}
+.news li div{
+    color: #C99F6A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+}
+.art1,.art3{
+    margin: 0 100px;
+}
+.art2 {
+    margin: 0 35px;
+}
+.art2 li:before,.art3 li:before {
+    content:'\00b7';
+    float: left;
+}
+.art2 li a,.art3 li a {
+    margin-left: 10px;
+}
+.notice-a01 li{
+    margin-bottom: 18px;
+}
+.art2 li,.art3 li {
+    line-height: 16px;
+    margin-bottom: 12px;
+}
+.box-cen li a{
+    display: block;
+    width: initial;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

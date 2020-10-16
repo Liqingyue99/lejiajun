@@ -1,0 +1,116 @@
+.hotsale{
+    font-size: 0;
+    text-align: center;
+}
+.hotsale .item-box {
+    width: 288px;
+    display: inline-block;
+    margin-left:15px;
+    font-size: 12px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.hotsale .item-box:first-child{
+    margin-left: 0
+}
+.hotsale .item-box .img-box {
+    padding: 20px 20px 0;
+    overflow: hidden;
+}
+.hotsale .item-box .img-box img{
+    margin-bottom: 0;
+}
+.hotsale .item-box .txt-box{
+    padding: 20px 23px 20px;
+    font-size: 12px;
+}
+.hotsale  .item-name{
+    line-height: 1.2em;
+    font-size: 12px;
+    height: 1.2em;
+    overflow: hidden;
+    text-align: center;
+    width: 170px;
+    margin: 0 auto;
+}
+.hotsale  .item-name a{
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 0;
+}
+.hotsale  .item-doc{
+    line-height: 1.2em;
+    font-size: 12px;
+    height: 1.2em;
+    overflow: hidden;
+    text-align: left;
+    margin-top: 5px;
+}
+.hotsale .item-doc a{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.hotsale  .item-actPrice{
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+}
+.hotsale .item-actPrice b{
+    font-size: 20px;
+    margin-right: 5px;
+    color: #DCB191;
+}
+.hotsale .item-actPrice i{
+    font-size: 12px;
+    margin-right: 1px;
+}
+.hotsale .item-actPrice{
+    display: inline-block;
+}
+.hotsale .fav-icon{
+    display: inline-block;
+    width: 15px;
+    height: 23px;
+    background: url(../images/icon-love-1.png) no-repeat center center;
+    cursor: pointer;
+    transition: transform .5s;
+}
+.hotsale  .fav-icon:hover,
+.hotsale  .on .fav-icon{
+    transform: scale(1.2) rotateY(180deg);
+    /* background-image: url(/images/v3.0/fav-2.png); */
+}
+
+.hotsale  .item-actPrice a{
+    background-color: #000;
+    color: #fff;
+    padding: 3px 10px;
+}
+.hotsale .btn-link{
+    background-color: #DCB191;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 6px 22px;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.hotsale .item-box .btn-fav {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+.hotsale .act-btn {
+    margin-top: 20px;
+    position: relative;
+}

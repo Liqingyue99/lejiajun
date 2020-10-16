@@ -1,0 +1,124 @@
+.product-box{
+    padding-bottom: 40px;
+}
+.box-hd h2{
+    width: 1200px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #4A4041;
+    text-align: left;
+}
+.box-hd h2 a{
+    font-size: 12px;
+    float: right;
+}
+.tehui .item-box:nth-child(2n+1){
+    margin-left: 0;
+    float: left;
+}
+.tehui .item-box{
+    width: 592px;
+    height: 338px;
+    margin-left: 14px;
+    background-color: #fff;
+    display: inline-block;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    float: left;
+}
+.tehui .item-box .img-box{
+    float: left;
+    padding: 20px 30px 0 20px;
+    position: relative;
+}
+.item-box .img-box >a{
+    display: inline-block;
+    position: relative;
+}
+.item-box .img-box img{
+    cursor: pointer;
+    margin: 0;
+    width: 250px;
+    height: 250px;
+}
+.tehui .img-nav{
+    text-align: center;
+}
+.tehui .img-nav img{
+    width: 40px;
+    height: 40px;
+    margin: 0 9px;
+}
+.tehui .txt-box{
+    width: 270px;
+}
+.txt-box >div{
+    font-size: 12px;
+    color: #9b9b9b;
+}
+.txt-box .item-doc a{
+    color: #9D1D22;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.txt-box h2{
+    height: 45px;
+    line-height: 18px;
+    font-size: 14px;
+}
+.txt-box .item-djs{
+    margin-top: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    color: #9b9b9b;
+}
+.txt-box .item-djs:before{
+    content: '特惠结束倒计时';
+    display: block;
+    margin-bottom: 4px;
+}
+.txt-box .item-djs span{
+    color: #444;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.txt-box .item-djs span:first-child{
+    margin-left: 0;
+}
+.txt-box .item-actPrice{
+    margin-top: 30px;
+}
+.txt-box .item-actPrice::before{
+    content: "特惠价：";
+}
+.txt-box .item-actPrice b{
+    color: #9D1D22;
+    font-size: 28px;
+    width: 123px;
+    display: inline-block;
+}
+.txt-box .item-actPrice .yen {
+    font-size: 14px;
+    margin-right: 4px;
+    font-style: normal;
+    margin-top: 2px;
+    font-family: 'Microsoft YaHei';
+}
+.txt-box .item-actPrice .btn-link{
+    display: inline-block;
+    padding: 4px 21px;
+    background: #9D1D22 ;
+    font-size: 12px;
+    color: #fff;
+    vertical-align: text-bottom;
+    border-radius: 4px;
+}
