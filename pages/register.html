@@ -33,6 +33,27 @@
                     <a href="javaScript:;">公告：官方商城特惠专场，更多优惠咨询客服！</a>
                 </p>
             </div>
+            <script>
+                $('.gonggao>p').animate({
+                    left:-252,
+                },3000,'linear',function(){
+                    $('.gonggao>p').css({
+                        left:380
+                    })
+                })
+                function ab(){
+                    $('.gonggao>p').animate({
+                        left:-252,
+                    },6000,'linear',function(){
+                        $('.gonggao>p').css({
+                            left:380
+                        })
+                        setTimeout(ab,0); 
+                    })
+                }
+                ab();
+                
+            </script>
             <div class="login-info">
                 <div class="login-link">
                     <a href="./login.html">登录</a>
