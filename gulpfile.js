@@ -15,7 +15,7 @@ const del = require('del')
 
 // 2-3 书写一个打包css的方法
 const cssHandler = ()=>{
-    return gulp.src('./lejiajun/css/*.css')
+    return gulp.src('./lele/css/*.css')
     .pipe(autoprefixer())
     .pipe(cssmin())
     .pipe(gulp.dest('./dist/css'))
@@ -23,19 +23,19 @@ const cssHandler = ()=>{
 
 // 3-1 书写一个移动images文件夹的方法
 const imgHandler = ()=>{
-    return gulp.src('./lejiajun/images/**')
+    return gulp.src('./lele/images/**')
     .pipe(gulp.dest('./dist/images'))
 }
 
 // 5-1 书写一个移动lib文件夹的方法
 const libHandler = ()=>{
-    return gulp.src('./lejiajun/lib/*.js')
+    return gulp.src('./lele/lib/*.js')
     .pipe(gulp.dest('./dist/lib'))
 }
 
 // 6-2 书写一个压缩html文件的方法
 const htmlHandler = ()=>{
-    return gulp.src('./lejiajun/pages/*.html')
+    return gulp.src('./lele/pages/*.html')
     // 压缩html需要配置压缩的参数
     .pipe(htmlmin({
         collapseWhitespace: true, //压缩空格
