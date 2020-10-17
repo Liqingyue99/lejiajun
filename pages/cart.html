@@ -183,8 +183,8 @@
                                     <span id="del">删除</span>
                                 </td>
                             </tr>
-                        `)
-                        
+                        `)                        
+                        $('#shopcarcount').html('('+count+')')
                         $('.countDown').click(function(){
                             if(count>0){
                                 console.log(1)
@@ -192,7 +192,8 @@
                                 $('.count>span').html(count);
                                 money = v.money*count;
                                 $('.count').next().html(money);
-                                $('.jiesuan>p>span').html(money);
+                                $('.jiesuan>p>span').html(money);                                
+                                $('#shopcarcount').html('('+count+')')
                             }                            
                         })
                         $('.countAdd').click(function(){
@@ -201,6 +202,7 @@
                             money = v.money*count;
                             $('.count').next().html(money);
                             $('.jiesuan>p>span').html(money);
+                            $('#shopcarcount').html('('+count+')')
                         })
                         $("#del").click(function(){
                             $("#del").parents('tr').remove();
