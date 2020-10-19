@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   background-color: #FAF8F7 !important;
   font-size: 14px;
@@ -57,7 +56,7 @@ ul.nav-menu {
 }
 .table tr td:first-child {
   width: 75px;
-  text-align: left;
+  text-align: center;
 }
 
 #del {
@@ -90,5 +89,3 @@ ul.nav-menu {
   line-height: 40px;
   border-radius: 4px;
 }
-
-/*# sourceMappingURL=cart.css.map */
