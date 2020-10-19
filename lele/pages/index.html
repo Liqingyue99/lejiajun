@@ -28,7 +28,38 @@
     <script src="../lib/swiper.min.js"></script>
     <script src="../lib/jquery.min.js"></script>
 </head>
-<body>    
+<body>  
+     <!-- 创建库和表 -->  
+     <script>
+        creat();
+        function creat(){
+            console.log(0)
+            $.ajax({
+                url:'../server/model/create_database.php',
+                success:function(){
+                    console.log(1)
+                }
+            })
+            $.ajax({
+                url:'../server/model/create_table.php',
+                success:function(){
+                    console.log(2)
+                }
+            })
+            $.ajax({
+                url:'../server/model/create_user.php',
+                success:function(){
+                    console.log(3)
+                }
+            })
+            $.ajax({
+                url:'../server/model/create_usertable.php',
+                success:function(){
+                    console.log(4)
+                }
+            })
+        }
+    </script>
     <!-- 固定的头部 -->
     <div class="header">
         <div class="header-box box-cen clearfix">
