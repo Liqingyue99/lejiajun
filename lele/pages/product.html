@@ -165,17 +165,8 @@
             <div class="shopcar-link">
                 <a href="./cart.html">
                     购物车
-                    <span id="shopcarcount">(0)</span>
+                    <span id="shopcarcount"></span>
                 </a>
-                <script>
-                    $.ajax({
-                        url:'../shop.json',
-                        success:function(res){
-                            // console.log(res[0].count)
-                            $('#shopcarcount').html('('+res[0].count+')')
-                        }
-                    })
-                </script>
             </div>
         </div>
         
@@ -286,8 +277,27 @@
                 <div class="buy">
                     <a href="./cart.html"><input type="button" value="加入购物车" style="cursor: pointer;"></a>
                 </div>
-            </div>
-            
+                <script>
+                    $('.buy').click(function(){
+                        $.ajax({
+                            url:'../server/addwq.php',
+                            data:{
+                                id:'123',
+                                name:'方太 JQC2＋HT9BE 风魔方 烟灶套餐（不带装饰罩）',
+                                price:3299.00,
+                                img:'../images/product01.jpg',
+                                num:1
+                            },
+                            success:function(res){
+                                if(res.code){
+                                    alert('商品加入成功')
+                                }    
+                            },
+                            dataType:'json'
+                        })
+                    })
+                </script>
+            </div>            
         </div>
 
     </div>
