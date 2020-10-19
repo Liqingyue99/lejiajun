@@ -17,10 +17,10 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 //2 连接数据库
-$conn = mysqli_connect('localhost','root','root','user');
+$conn = mysqli_connect('127.0.0.1','root','root','user');
 
 //3 书写SQL语句
-$sql = "SELECT * FROM `user` WHERE `username`='$username' AND `password`='$password'";
+$sql = "SELECT * FROM `users` WHERE `username`='$username' AND `u_password`='$password'";
 
 //4 执行SQL语句
 $result = mysqli_query($conn,$sql);
