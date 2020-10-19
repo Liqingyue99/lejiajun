@@ -153,7 +153,7 @@
             <div class="shopcar-link">
                 <a href="#">
                     购物车
-                    <span id="shopcarcount">(0)</span>
+                    <span id="shopcarcount"></span>
                 </a>
             </div>
         </div>
@@ -169,7 +169,7 @@
         </ul>
     </div>
     <table class="table box-cen">
-        <tbody class="tbody">
+        <thead>
             <tr>
                 <th>产品</th>
                 <th>产品信息</th>
@@ -178,79 +178,96 @@
                 <th>价格（元）</th>
                 <th>操作</th>
             </tr>
+        </thead>
+        <tbody class="tbody">
+            
         </tbody>
+        
     </table>
+    <div class="none" style="text-align: center;">没有商品了，快去选购吧!</div>
     <div class="jiesuan box-cen">
-        <p>商品总金额：<span>0</span>元</p>
-        <input type="button" value="结算">
+
+        <input type="button" value="结算" style="margin-top: 20px;">
     </div>
     <script>
-        var count;
-        $.ajax({
-            url:'../shop.json',
-            success:function(res){
-                $.each(res,function(i,v){
-                    if(v.count!=0){
-                        count = v.count;
-                        var money = v.money*count;
-                        $('.tbody').append(`
-                            <tr>
-                                <td><img src="${v.img}" alt=""></td>
-                                <td>${v.name}</td>
-                                <td>${v.money}</td>
-                                <td class="count"><button class="countDown" style="margin-right:10px;width:20px;">-</button><span>${count}</span><button class="countAdd" style="margin-left:10px;width:20px;">+</button></td>
-                                <td>${money}</td>
-                                <td>
-                                    <span id="del">删除</span>
-                                </td>
-                            </tr>
-                        `)                        
-                        $('#shopcarcount').html('('+count+')')
-                        $('.countDown').click(function(){
-                            if(count>0){
-                                console.log(1)
-                                count--;
-                                $('.count>span').html(count);
-                                money = v.money*count;
-                                $('.count').next().html(money);
-                                $('.jiesuan>p>span').html(money);                                
-                                $('#shopcarcount').html('('+count+')')
-                            }                            
+        showlist();
+        function showlist(){
+            $.ajax({
+                url:'../server/showlist.php',
+                success:function(res){
+                    console.log(res.data)
+                    if(res.code){
+                        var arr = res.data;
+                        $('.tbody').parent().show();
+                        $('.none').hide();
+                        $('.tbody').empty();
+                        $.each(arr,function(index,item){
+                            $('.tbody').append(`
+                                <tr id="${item.product_id}">
+                                    <td>${item.product_name}</td>
+                                    <td>
+                                        <img src="${item.product_img}" alt="">
+                                    </td>
+                                    <td>${item.product_price}</td>
+                                    <td>
+                                        <span class='add'>+</span>
+                                        <span>${item.product_num}</span>
+                                        <span class="jian">-</span>
+                                    </td>
+                                    <td>${item.product_price*item.product_num}</td>
+                                    <td class="del">删除</td>
+                                </tr>
+                            `)
                         })
-                        $('.countAdd').click(function(){
-                            count++;
-                            $('.count>span').html(count);
-                            money = v.money*count;
-                            $('.count').next().html(money);
-                            $('.jiesuan>p>span').html(money);
-                            $('#shopcarcount').html('('+count+')')
-                        })
-                        $("#del").click(function(){
-                            $("#del").parents('tr').remove();
-                        })
-                        $('.jiesuan>p>span').html(money);
-                    };
-                    
-                });                
-            }
-        });
-        var empty = false;
-        $('.jiesuan>input').click(function(){
-            if(!empty){
-                alert("已完成购物");
-                $('.table>tbody').remove();
-                $('.jiesuan>p').remove();
-                $('.table').append(`
-                    <tr><td class="empty">${"购物车空空如也"}</td></tr>
-                `)
-                empty = true;
-                return;
-            }
-            alert("购物车是空的哦!快去选购喜欢的礼物吧!");
-        });
+                    }
+                    else{
+                        $('.tbody').parent().hide();
+                        $('.none').show();
+                    }
+                },
+                dataType:'json',
+                cache:false
+            })
+        }
         
-        
+        //点击+增加一个商品数量，点击—减少一个商品数量
+        $('.tbody').click(function(e){
+            var target = e.target;
+            // target是一个dom节点
+            if((target.className=='add')||(target.className=='jian')){
+                // 点击+增加一个商品数量,点击-减少一个商品数量
+                $.ajax({
+                    url:'../server/updatewq.php',
+                    data:{
+                        type:target.className,
+                        id:$(target).parents('tr').attr('id')
+                    },
+                    success:function(res){
+                        if(res.code){
+                            showlist()
+                        }
+                    },
+                    dataType:'json'
+                })
+
+            }else if(target.className=='del'){
+                // 点击删除按钮删除一个商品
+                $.ajax({
+                    url:'../server/delwq.php',
+                    data:{
+                        id:$(target).parents('tr').attr('id')
+                    },
+                    success:function(res){
+                        if(res.code){
+                            showlist()
+                        }
+                    },
+                    dataType:'json'
+                })
+            }
+        })
     </script>
+
     <!-- 底部 -->
     <div class="mg50"></div>
     <div class="f-main">
