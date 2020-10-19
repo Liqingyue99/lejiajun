@@ -169,17 +169,8 @@
             <div class="shopcar-link">
                 <a href="./cart.html">
                     购物车
-                    <span id="shopcarcount">(0)</span>
+                    <span id="shopcarcount"></span>
                 </a>
-                <script>
-                    $.ajax({
-                        url:'../shop.json',
-                        success:function(res){
-                            // console.log(res[0].count)
-                            $('#shopcarcount').html('('+res[0].count+')')
-                        }
-                    })
-                </script>
             </div>            
         </div>
     </div>
